@@ -1,0 +1,30 @@
+[
+  {
+    "tokens": ["John", "Doe", "works", "at", "Google", "in", "California"],
+    "ner_tags": ["B-PER", "I-PER", "O", "O", "B-ORG", "O", "B-LOC"]
+  },
+  {
+    "tokens": ["Apple", "released", "the", "new", "iPhone", "in", "September"],
+    "ner_tags": ["B-ORG", "O", "O", "O", "B-PROD", "O", "B-DATE"]
+  },
+  {
+    "tokens": ["Barack", "Obama", "was", "born", "in", "Hawaii"],
+    "ner_tags": ["B-PER", "I-PER", "O", "O", "O", "B-LOC"]
+  },
+  {
+    "tokens": ["Paris", "is", "the", "capital", "of", "France"],
+    "ner_tags": ["B-LOC", "O", "O", "O", "O", "B-LOC"]
+  },
+  {
+    "tokens": ["Microsoft", "announced", "a", "partnership", "with", "OpenAI"],
+    "ner_tags": ["B-ORG", "O", "O", "O", "O", "B-ORG"]
+  },
+  {
+    "tokens": ["Elon", "Musk", "founded", "SpaceX", "in", "2002"],
+    "ner_tags": ["B-PER", "I-PER", "O", "B-ORG", "O", "B-DATE"]
+  },
+  {
+    "tokens": ["The", "Amazon", "rainforest", "is", "located", "in", "Brazil"],
+    "ner_tags": ["O", "B-LOC", "O", "O", "O", "O", "B-LOC"]
+  }
+]
