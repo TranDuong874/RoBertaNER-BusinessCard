@@ -46,3 +46,9 @@ train:
   save_total_limit: 1
 eval:
   per_device_eval_batch_size: 8
+augment:
+  enabled: tru         
+  type: "space_newline"
+  prob_space: 0.9
+  prob_newline: 0.5
+  max_spaces: 8         
