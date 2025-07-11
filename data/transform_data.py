@@ -29,6 +29,5 @@ if __name__ == '__main__':
     # Update B-Website tags
     updated_ner_data = update_website_tag(ner_json)
 
-
     write_json('data_ner_updated.json', updated_ner_data)
 
