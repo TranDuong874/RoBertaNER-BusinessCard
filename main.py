@@ -3,7 +3,7 @@ import torch
 from torch.utils.data import DataLoader, Dataset
 from transformers import XLMRobertaTokenizer, XLMRobertaForTokenClassification
 # TODO:
-# Add website labe
+# Add website label
 
 # ========== UTILITIES ==========
 def label2id(label, label_map):
@@ -46,6 +46,3 @@ class NERModel(torch.nn.Module):
         pass
 
 if __name__ == '__main__':
-    tokenizer = AutoTokenizer.from_pretrained("Davlan/xlm-roberta-base-ner-hrl")
-    model = AutoModelForTokenClassification.from_pretrained("Davlan/xlm-roberta-base-ner-hrl")
-    
