@@ -163,7 +163,7 @@ if __name__ == '__main__':
         gradient_checkpointing          =train_cfg["gradient_checkpointing"],
         gradient_checkpointing_kwargs   =train_cfg.get("gradient_checkpointing_kwargs", {}),
         save_strategy                   =train_cfg["save_strategy"],
-        evaluation_strategy             =train_cfg["evaluation_strategy"],
+        eval_strategy             =train_cfg["evaluation_strategy"],
         learning_rate                   =float(train_cfg["learning_rate"]),
         per_device_train_batch_size     =int(train_cfg["per_device_train_batch_size"]),
         per_device_eval_batch_size      =int(eval_cfg["per_device_eval_batch_size"]),
