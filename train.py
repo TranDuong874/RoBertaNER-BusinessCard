@@ -21,7 +21,27 @@ def id_to_label(label_list):
     for i, label in enumerate(label_list):
         dic[i] = label
     return dic
-    
+
+def compute_metrics(p):
+    predictions, labels = p
+    predictions = np.argmax(predictions, axis=2)
+
+    true_predictions = [
+        [label_list[p] for (p, l) in zip(prediction, label) if l != -100]
+        for prediction, label in zip(predictions, labels)
+    ]
+    true_labels = [
+        [label_list[l] for (p, l) in zip(prediction, label) if l != -100]
+        for prediction, label in zip(predictions, labels)
+    ]
+
+    results = seqeval.compute(predictions=true_predictions, references=true_labels, zero_division=0)
+    return {
+        "precision": results["overall_precision"],
+        "recall": results["overall_recall"],
+        "eval_f1": results["overall_f1"],
+        "accuracy": results["overall_accuracy"],
+    }
 # ========== DATASET   ==========
 class NERDataset(Dataset):
     def __init__(self, data_path, tokenizer, label2id, max_length):
@@ -187,7 +207,8 @@ if __name__ == '__main__':
         train_dataset=train_dataset,
         eval_dataset=test_dataset,
         data_collator=train_dataloader.data_collator,
-        tokenizer=tokenizer
+        tokenizer=tokenizer,
+        computer_metrics=compute_metrics
     )
 
     # Start training
