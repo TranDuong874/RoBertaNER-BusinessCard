@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 import yaml
 import sys
 import numpy as np
-import seqeval
+from seqeval.metrics import accuracy_score, f1_score, precision_score, recall_score
 
 # TODO:
 # Add website label
@@ -38,12 +38,11 @@ def compute_metrics(p):
         for prediction, label in zip(predictions, labels)
     ]
 
-    results = seqeval.compute(predictions=true_predictions, references=true_labels, zero_division=0)
     return {
-        "precision": results["overall_precision"],
-        "recall": results["overall_recall"],
-        "eval_f1": results["overall_f1"],
-        "accuracy": results["overall_accuracy"],
+        "precision": precision_score(true_labels, true_predictions),
+        "recall": recall_score(true_labels, true_predictions),
+        "eval_f1": f1_score(true_labels, true_predictions),
+        "accuracy": accuracy_score(true_labels, true_predictions),
     }
 # ========== DATASET   ==========
 class NERDataset(Dataset):
