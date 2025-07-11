@@ -1,7 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForTokenClassification
 import torch
 from torch.utils.data import DataLoader, Dataset
-from transformers import XLMRobertaTokenizer, XLMRobertaForTokenClassification, DataCollatorForTokenClassification, Trainer, TrainingArguments
+from transformers import XLMRobertaTokenizer, DataCollatorForTokenClassification, Trainer, TrainingArguments
 import json
 from sklearn.model_selection import train_test_split
 import yaml
