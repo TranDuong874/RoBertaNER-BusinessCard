@@ -127,6 +127,25 @@ class NERDataLoader(DataLoader):
     def collate_fn(self, batch):
         return self.data_collator(batch)
 
+def augment_sample(sample, prob_space=0.3, prob_newline=0.1, max_spaces=4):
+    tokens = sample['tokens']
+    ner_tags = sample['ner_tags']
+    new_tokens = []
+    new_tags = []
+    for i, token in enumerate(tokens):
+        new_tokens.append(token)
+        new_tags.append(ner_tags[i])
+        if i < len(tokens) - 1:
+            r = np.random.rand()
+            if r < prob_newline:
+                new_tokens.append('\n')
+                new_tags.append('O')
+            elif r < prob_newline + prob_space:
+                num_spaces = np.random.randint(1, max_spaces + 1)
+                new_tokens.append(' ' * num_spaces)
+                new_tags.append('O')
+    return {'tokens': new_tokens, 'ner_tags': new_tags}
+
 if __name__ == '__main__':
     # Get config path from command line
     config_path = sys.argv[1] if len(sys.argv) > 1 else 'training_config.yaml'
@@ -149,12 +168,23 @@ if __name__ == '__main__':
     with open(data_cfg['data_path'], 'r', encoding='utf-8') as f:
         full_data = json.load(f)
 
+    augment_cfg = config.get('augment', {})
+    augment_enabled = augment_cfg.get('enabled', False)
+    augment_type = augment_cfg.get('type', 'space_newline')
+    prob_space = augment_cfg.get('prob_space', 0.3)
+    prob_newline = augment_cfg.get('prob_newline', 0.1)
+    max_spaces = augment_cfg.get('max_spaces', 4)
+
     # Split into train and test
     train_data, test_data = train_test_split(
         full_data,
         test_size=data_cfg.get('test_size', 0.2),
         random_state=data_cfg.get('random_state', 42)
     )
+
+    # Augment train_data if enabled
+    if augment_enabled and augment_type == 'space_newline':
+        train_data = [augment_sample(s, prob_space, prob_newline, max_spaces) for s in train_data]
 
     # Save splits to temp files (or you can use in-memory datasets)
     with open(data_cfg['train_path'], 'w', encoding='utf-8') as f:
@@ -213,5 +243,4 @@ if __name__ == '__main__':
         compute_metrics=compute_metrics
     )
 
-    # Start training
     trainer.train()
