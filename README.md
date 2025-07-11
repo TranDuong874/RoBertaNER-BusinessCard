@@ -10,7 +10,7 @@
 
 2. **Install dependencies**
    ```bash
-   pip install -r requirements.txt
+    !pip install -U transformers datasets seqeval evaluate accelerate bitsandbytes sklearn-crfsuite -q
    ```
 
 3. **Run the training script**
