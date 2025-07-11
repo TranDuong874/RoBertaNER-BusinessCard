@@ -208,7 +208,7 @@ if __name__ == '__main__':
         eval_dataset=test_dataset,
         data_collator=train_dataloader.data_collator,
         tokenizer=tokenizer,
-        computer_metrics=compute_metrics
+        compute_metrics=compute_metrics
     )
 
     # Start training
