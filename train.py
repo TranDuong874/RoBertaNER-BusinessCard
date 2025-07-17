@@ -79,9 +79,13 @@ if __name__ == "__main__":
         output_dir=config["training"]["output_dir"],
         gradient_checkpointing=config["training"]["gradient_checkpointing"],
         gradient_checkpointing_kwargs=config["training"]["gradient_checkpointing_kwargs"],
-        save_strategy=config["training"]["save_strategy"],
-        evaluation_strategy=config["training"]["eval_strategy"],  # updated key name to correct HF arg
+        save_strategy=config["training"]["save_strategy"],          # "steps"
+        evaluation_strategy=config["training"]["eval_strategy"],    # "steps"
         eval_steps=int(config["training"]["eval_steps"]) if "eval_steps" in config["training"] else None,
+        
+        # **Add save_steps since save_strategy is "steps" but config missing save_steps**
+        save_steps=int(config["training"]["eval_steps"]) if "eval_steps" in config["training"] else 100, 
+        
         learning_rate=float(config["training"]["learning_rate"]),
         per_device_train_batch_size=int(config["training"]["per_device_train_batch_size"]),
         per_device_eval_batch_size=int(config["training"]["per_device_eval_batch_size"]),
@@ -89,7 +93,7 @@ if __name__ == "__main__":
         weight_decay=float(config["training"]["weight_decay"]),
         logging_dir=config["training"]["logging_dir"],
         logging_steps=int(config["training"]["logging_steps"]),
-        logging_strategy=config["training"]["logging_strategy"],
+        logging_strategy=config["training"]["logging_strategy"],    # "steps"
         report_to=config["training"]["report_to"],
         fp16=config["training"]["fp16"],
         optim=config["training"]["optim"],
@@ -99,8 +103,6 @@ if __name__ == "__main__":
         save_total_limit=int(config["training"]["save_total_limit"]),
         lr_scheduler_type=config["training"].get("lr_scheduler_type", "linear"),
         warmup_ratio=float(config["training"]["warmup_ratio"]) if "warmup_ratio" in config["training"] else None,
-        # Alternatively, use warmup_steps instead of warmup_ratio if preferred:
-        # warmup_steps=int(config["training"]["warmup_steps"]) if "warmup_steps" in config["training"] else None,
     )
 
     # Initialize Trainer
