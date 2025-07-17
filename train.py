@@ -95,8 +95,7 @@ if __name__ == "__main__":
         load_best_model_at_end=config["training"]["load_best_model_at_end"],
         metric_for_best_model=config["training"]["metric_for_best_model"],
         greater_is_better=config["training"]["greater_is_better"],
-        save_total_limit=int(config["training"]["save_total_limit"]),
-        max_grad_norm=float(config["training"]["max_grad_norm"]),
+        save_total_limit=int(config["training"]["save_total_limit"])
     )
 
     # Initialize Trainer

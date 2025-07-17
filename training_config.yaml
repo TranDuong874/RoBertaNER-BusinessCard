@@ -52,7 +52,7 @@ training:
   gradient_checkpointing: true
   gradient_checkpointing_kwargs:
     use_reentrant: false
-  max_grad_norm: None
+  
 
 inference:
   run_inference: true
