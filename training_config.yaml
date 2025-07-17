@@ -52,6 +52,10 @@ training:
   gradient_checkpointing: true
   gradient_checkpointing_kwargs:
     use_reentrant: false
+  evaluation_strategy: "steps"
+  eval_steps: 100
+  lr_scheduler_type: "linear"
+  warmup_ratio: 0.1
   
 
 inference:

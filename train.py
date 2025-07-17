@@ -80,14 +80,15 @@ if __name__ == "__main__":
         gradient_checkpointing=config["training"]["gradient_checkpointing"],
         gradient_checkpointing_kwargs=config["training"]["gradient_checkpointing_kwargs"],
         save_strategy=config["training"]["save_strategy"],
-        eval_strategy=config["training"]["eval_strategy"],
-        learning_rate=float(config["training"]["learning_rate"]),  # Convert to float
-        per_device_train_batch_size=int(config["training"]["per_device_train_batch_size"]),  # Convert to int
-        per_device_eval_batch_size=int(config["training"]["per_device_eval_batch_size"]),  # Convert to int
-        num_train_epochs=int(config["training"]["num_train_epochs"]),  # Convert to int
-        weight_decay=float(config["training"]["weight_decay"]),  # Convert to float
+        evaluation_strategy=config["training"]["eval_strategy"],  # updated key name to correct HF arg
+        eval_steps=int(config["training"]["eval_steps"]) if "eval_steps" in config["training"] else None,
+        learning_rate=float(config["training"]["learning_rate"]),
+        per_device_train_batch_size=int(config["training"]["per_device_train_batch_size"]),
+        per_device_eval_batch_size=int(config["training"]["per_device_eval_batch_size"]),
+        num_train_epochs=int(config["training"]["num_train_epochs"]),
+        weight_decay=float(config["training"]["weight_decay"]),
         logging_dir=config["training"]["logging_dir"],
-        logging_steps=int(config["training"]["logging_steps"]),  # Convert to int
+        logging_steps=int(config["training"]["logging_steps"]),
         logging_strategy=config["training"]["logging_strategy"],
         report_to=config["training"]["report_to"],
         fp16=config["training"]["fp16"],
@@ -95,7 +96,11 @@ if __name__ == "__main__":
         load_best_model_at_end=config["training"]["load_best_model_at_end"],
         metric_for_best_model=config["training"]["metric_for_best_model"],
         greater_is_better=config["training"]["greater_is_better"],
-        save_total_limit=int(config["training"]["save_total_limit"])
+        save_total_limit=int(config["training"]["save_total_limit"]),
+        lr_scheduler_type=config["training"].get("lr_scheduler_type", "linear"),
+        warmup_ratio=float(config["training"]["warmup_ratio"]) if "warmup_ratio" in config["training"] else None,
+        # Alternatively, use warmup_steps instead of warmup_ratio if preferred:
+        # warmup_steps=int(config["training"]["warmup_steps"]) if "warmup_steps" in config["training"] else None,
     )
 
     # Initialize Trainer
