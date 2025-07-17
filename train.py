@@ -74,20 +74,20 @@ if __name__ == "__main__":
         augment=None,  # No augmentation for validation
     )
 
-    # Training arguments
+
     training_args = TrainingArguments(
         output_dir=config["training"]["output_dir"],
         gradient_checkpointing=config["training"]["gradient_checkpointing"],
         gradient_checkpointing_kwargs=config["training"]["gradient_checkpointing_kwargs"],
         save_strategy=config["training"]["save_strategy"],
         eval_strategy=config["training"]["eval_strategy"],
-        learning_rate=config["training"]["learning_rate"],
-        per_device_train_batch_size=config["training"]["per_device_train_batch_size"],
-        per_device_eval_batch_size=config["training"]["per_device_eval_batch_size"],
-        num_train_epochs=config["training"]["num_train_epochs"],
-        weight_decay=config["training"]["weight_decay"],
+        learning_rate=float(config["training"]["learning_rate"]),  # Convert to float
+        per_device_train_batch_size=int(config["training"]["per_device_train_batch_size"]),  # Convert to int
+        per_device_eval_batch_size=int(config["training"]["per_device_eval_batch_size"]),  # Convert to int
+        num_train_epochs=int(config["training"]["num_train_epochs"]),  # Convert to int
+        weight_decay=float(config["training"]["weight_decay"]),  # Convert to float
         logging_dir=config["training"]["logging_dir"],
-        logging_steps=config["training"]["logging_steps"],
+        logging_steps=int(config["training"]["logging_steps"]),  # Convert to int
         logging_strategy=config["training"]["logging_strategy"],
         report_to=config["training"]["report_to"],
         fp16=config["training"]["fp16"],
@@ -95,7 +95,7 @@ if __name__ == "__main__":
         load_best_model_at_end=config["training"]["load_best_model_at_end"],
         metric_for_best_model=config["training"]["metric_for_best_model"],
         greater_is_better=config["training"]["greater_is_better"],
-        save_total_limit=config["training"]["save_total_limit"]
+        save_total_limit=int(config["training"]["save_total_limit"])  # Convert to int
     )
 
     # Initialize Trainer
