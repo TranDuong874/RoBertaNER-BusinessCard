@@ -2,12 +2,12 @@ import json
 from torch.utils.data import Dataset
 
 class NERDataset(Dataset):
-    def __init__(self, data_path, tokenizer, label2id, max_length=128, transform=None):
+    def __init__(self, data_path, tokenizer, label2id, max_length=128, augment=None):
         self.tokenizer = tokenizer
         self.data_path = data_path
         self.label2id = label2id
         self.max_length = max_length
-        self.transform = transform
+        self.augment = augment
 
         with open(data_path, 'r', encoding='utf-8') as f:
             self.data_set = json.load(f)
@@ -33,8 +33,8 @@ class NERDataset(Dataset):
 
         selected_example = self.data_set[idx]
         
-        if self.transform:
-            selected_example = self.transform(selected_example)
+        if self.augment:
+            selected_example = self.augment(selected_example)
             
         # Tokenize text
         tokenized_text = self.tokenizer(

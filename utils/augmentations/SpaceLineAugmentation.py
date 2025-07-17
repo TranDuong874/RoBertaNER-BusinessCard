@@ -3,6 +3,7 @@ import numpy as np
 
 class SpaceLineAugmentation(nn.Module):
     def __init__(self, prob_space=0.5, prob_newline=0.5, max_spaces=4):
+        super().__init__()
         self.prob_space = prob_space
         self.prob_newline = prob_newline
         self.max_spaces = max_spaces
@@ -42,4 +43,6 @@ class SpaceLineAugmentation(nn.Module):
     def forward(self, x):
         return self.augment_sample(x, self.prob_sapce, self.prob_newline, self.max_spaces)
 
-        
+    def __call__(self, tokens, labels=None):
+        """Allows the module to be called like a function."""
+        return self.forward(tokens, labels)
