@@ -1,6 +1,7 @@
 import numpy as np
 from seqeval.metrics import classification_report
 from transformers.trainer_callback import TrainerCallback
+import pandas as pd
 
 def label_to_id(label_list):
     dic = {}
