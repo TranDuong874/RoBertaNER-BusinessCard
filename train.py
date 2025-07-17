@@ -80,7 +80,7 @@ if __name__ == "__main__":
         gradient_checkpointing=config["training"]["gradient_checkpointing"],
         gradient_checkpointing_kwargs=config["training"]["gradient_checkpointing_kwargs"],
         save_strategy=config["training"]["save_strategy"],          # "steps"
-        evaluation_strategy=config["training"]["eval_strategy"],    # "steps"
+        eval_strategy=config["training"]["eval_strategy"],    # "steps"
         eval_steps=int(config["training"]["eval_steps"]) if "eval_steps" in config["training"] else None,
         
         # **Add save_steps since save_strategy is "steps" but config missing save_steps**
