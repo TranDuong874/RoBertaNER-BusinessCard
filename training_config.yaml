@@ -52,3 +52,8 @@ training:
   gradient_checkpointing: true
   gradient_checkpointing_kwargs:
     use_reentrant: false
+
+inference:
+  run_inference: true
+  output_path: "./output/inference_results.json"
+  inference_data_path: "/pytess_ner_data.json"  # Defaults to val_data_path if not specified
