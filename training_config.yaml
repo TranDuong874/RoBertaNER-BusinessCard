@@ -1,8 +1,8 @@
 data:
-  data_path: "data/data_ner_updated.json"
+  data_path: "data/ner_dataset.json"
   train_path: "data/train_data.json"
   test_path: "data/test_data.json"
-  test_size: 0.2
+  test_size: 0.1
   random_state: 42
   max_length: 128
   label_list:
@@ -21,6 +21,8 @@ data:
     - "I-Email"
     - "B-Department"
     - "I-Department"
+    - "B-Website"
+    - "I-Website"
 model:
   model_checkpoint: "Davlan/xlm-roberta-base-ner-hrl"
 train:
