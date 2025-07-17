@@ -10,18 +10,18 @@ class SpaceLineAugmentation(nn.Module):
     
     def augment_sample(self, sample, prob_space=0.5, prob_newline=0.5, max_spaces=4):
         """
-            Augment a single data sample by adding space and new line
+        Augment a single data sample by adding space and new line.
 
-            Params:
-                sample: a single training sample with the following format
-                    {
-                        "tokens": ["raw", "string", "tokens"],
-                        "ner_tags": ["O", "O", "O"]
-                    }
-                prob_space: Probability of adding space characters
-                prob_newline: Probability of adding a newline
+        Params:
+            sample: a single training sample with the following format
+                {
+                    "tokens": ["raw", "string", "tokens"],
+                    "ner_tags": ["O", "O", "O"]
+                }
+            prob_space: Probability of adding space characters
+            prob_newline: Probability of adding a newline
+            max_spaces: Maximum number of spaces to add
         """
-        
         tokens = sample['tokens']
         ner_tags = sample['ner_tags']
         new_tokens = []
@@ -40,9 +40,8 @@ class SpaceLineAugmentation(nn.Module):
                     new_tags.append('O')
         return {'tokens': new_tokens, 'ner_tags': new_tags}
 
-    def forward(self, x):
-        return self.augment_sample(x, self.prob_sapce, self.prob_newline, self.max_spaces)
+    def forward(self, sample):
+        return self.augment_sample(sample, self.prob_space, self.prob_newline, self.max_spaces)
 
-    def __call__(self, tokens, labels=None):
-        """Allows the module to be called like a function."""
-        return self.forward(tokens, labels)
+    def __call__(self, sample):
+        return self.forward(sample)
