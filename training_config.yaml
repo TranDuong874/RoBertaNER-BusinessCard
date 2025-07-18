@@ -28,6 +28,7 @@ dataset:
     prob_space: 0.8
     prob_newline: 0.5
     max_spaces: 10
+    replace_prob: 0.3
 
 training:
   output_dir: "./output"

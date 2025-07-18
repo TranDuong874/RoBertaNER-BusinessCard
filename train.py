@@ -16,7 +16,7 @@ import yaml
 # HELPERS
 from utils.data import NERDataset
 from utils.tools import label_to_id, id_to_label
-from utils.augmentations import SpaceLineAugmentation
+from utils.augmentations import SpaceLineAugmentation, ReplacementAugmentation
 from utils.tools import make_compute_metrics, CSVLoggerCallback
 
 
@@ -55,7 +55,11 @@ if __name__ == "__main__":
             prob_space=config["dataset"]["augmentation"]["prob_space"],
             prob_newline=config["dataset"]["augmentation"]["prob_newline"],
             max_spaces=config["dataset"]["augmentation"]["max_spaces"]
+        ),
+        ReplacementAugmentation(
+            prob=["dataset"]["augmentation"]["replace_prob"]
         )
+
     )
 
     train_dataset = NERDataset(
