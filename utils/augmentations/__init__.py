@@ -1,2 +1,3 @@
 from .SpaceLineAugmentation import SpaceLineAugmentation
 from .ReplacementAugmentation import ReplacementAugmentation
+from .DiacreticAugmentation import DiacreticAugmentation
