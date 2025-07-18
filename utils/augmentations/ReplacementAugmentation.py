@@ -2,7 +2,7 @@ import torch.nn as nn
 import random
 from typing import Dict, List
 
-class ReplaceCharacterAugmentation(nn.Module):
+class ReplacementAugmentation(nn.Module):
     def __init__(self, prob=0.2):
         super().__init__()
         self.prob = prob
@@ -38,3 +38,6 @@ class ReplaceCharacterAugmentation(nn.Module):
             "tokens": new_tokens,
             "ner_tags": sample.get("ner_tags", [])
         }
+
+    def __call__(self, sample):
+        return self.forward(sample)
