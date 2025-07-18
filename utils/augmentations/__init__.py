@@ -1,2 +1,2 @@
 from .SpaceLineAugmentation import SpaceLineAugmentation
-from .ReplacementAugmentation import ReplaceCharacterAugmentation
+from .ReplacementAugmentation import ReplacementAugmentation
