@@ -16,7 +16,7 @@ import yaml
 # HELPERS
 from utils.data import NERDataset
 from utils.tools import label_to_id, id_to_label
-from utils.augmentations import SpaceLineAugmentation, ReplacementAugmentation
+from utils.augmentations import SpaceLineAugmentation, ReplacementAugmentation, DiacreticAugmentation
 from utils.tools import make_compute_metrics, CSVLoggerCallback
 
 
@@ -58,6 +58,9 @@ if __name__ == "__main__":
         ),
         ReplacementAugmentation(
             prob=config["dataset"]["augmentation"]["replace_prob"]
+        ),
+        DiacreticAugmentation(
+            prob=config["dataset"]["augmentation"]["remove_diacretic_prob"]
         )
     )
 
