@@ -58,6 +58,7 @@ training:
   save_steps: 100       # Add this line
   eval_strategy: "steps"
   eval_steps: 100
+  max_grad_norm: 1.0
   
 
 inference:

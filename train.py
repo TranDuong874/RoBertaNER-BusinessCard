@@ -109,6 +109,7 @@ if __name__ == "__main__":
         save_total_limit=int(config["training"]["save_total_limit"]),
         lr_scheduler_type=config["training"].get("lr_scheduler_type", "linear"),
         warmup_ratio=float(config["training"]["warmup_ratio"]) if "warmup_ratio" in config["training"] else None,
+        max_grad_norm=float(config["training"]["max_grad_norm"])
     )
 
     # Initialize Trainer
