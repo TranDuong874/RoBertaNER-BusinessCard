@@ -57,9 +57,8 @@ if __name__ == "__main__":
             max_spaces=config["dataset"]["augmentation"]["max_spaces"]
         ),
         ReplacementAugmentation(
-            prob=["dataset"]["augmentation"]["replace_prob"]
+            prob=config["dataset"]["augmentation"]["replace_prob"]
         )
-
     )
 
     train_dataset = NERDataset(
